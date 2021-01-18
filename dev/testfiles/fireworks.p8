@@ -2,25 +2,28 @@ pico-8 cartridge // http://www.pico-8.com
 version 29
 __lua__
 function createfirework(x,y)
-	fw={}
+	local fw={}
 	fw.x=x
 	fw.y=y
 	fw.color=rnd(16)-1
 	return fw
+end
 
 function _init()
 	fws={}
-	cur = {}
+	cur={}
+end
+
+function _draw()
+	cls()
+	pset(cur.x,cur.y,7)
+end
 
 function _update()
-	cur.x = peek(0x5f26)
-	cur.y = peek(0x5f27)
-	
-	if btn(4) then
-		print("a")
-	end
-
-
+	poke(0x5f2d,1)
+	cur.x=stat(32)
+	cur.y=stat(33)
+end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
