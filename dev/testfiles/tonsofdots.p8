@@ -6,7 +6,6 @@ function initdot(x,y)
 	dot.x = x
 	dot.y = y
 	dot.clr = rnd(16)-1
-	end
 	dot.draw = function(this)
 		pset(this.x,this.y,this.clr)
 	end
