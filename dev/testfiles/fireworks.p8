@@ -5,17 +5,19 @@ function createfirework(x,y)
 	local fw={}
 	fw.x=x
 	fw.y=y
-	fw.color=rnd(16)-1
+	fw.v=10
 	return fw
 end
 
 function _init()
 	poke(0x5f2d,1)
-	poke(0x5f5c,20)
-	poke(0x5f5d,20)
+	poke(0x5f5c,255)
 	
 	fws={}
 	cur={}
+	
+	mprim=false
+	mfired=false
 end
 
 function _draw()
@@ -25,15 +27,34 @@ function _draw()
 	for a in all(fws) do
 		pset(a.x,a.y,4)
 	end
+	
+	print(count(fws),0,0,7)
 end
 
 function _update()
 	cur.x=stat(32)
 	cur.y=stat(33)
 	
-	if (btnp(4)) then
-		add(fws,createfirework(cur.x,cur.y))
+	if (stat(34)!=1) mfired=false
+	if (stat(34)==1 and mfired==false) then
+		mprim=true
+		mfired=true
 	end
+	
+	if (mprim) then
+		add(fws,createfirework(cur.x,cur.y))
+		mprim=false	
+	end
+	
+	-- update firework pos --
+	
+	local tempmt={}
+	for a in all(fws) do
+		a.y-=a.v
+		if (a.y<127) add(tempmt,a) 
+		a.v-=0.75
+	end
+	fws=tempmt
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
