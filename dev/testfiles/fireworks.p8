@@ -10,6 +10,10 @@ function createfirework(x,y)
 end
 
 function _init()
+	poke(0x5f2d,1)
+	poke(0x5f5c,20)
+	poke(0x5f5d,20)
+	
 	fws={}
 	cur={}
 end
@@ -17,12 +21,19 @@ end
 function _draw()
 	cls()
 	pset(cur.x,cur.y,7)
+	
+	for a in all(fws) do
+		pset(a.x,a.y,4)
+	end
 end
 
 function _update()
-	poke(0x5f2d,1)
 	cur.x=stat(32)
 	cur.y=stat(33)
+	
+	if (btnp(4)) then
+		add(fws,createfirework(cur.x,cur.y))
+	end
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
