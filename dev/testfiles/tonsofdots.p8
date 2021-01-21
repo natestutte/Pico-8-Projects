@@ -5,7 +5,7 @@ function initdot(x,y)
 	local dot = {}
 	dot.x = x
 	dot.y = y
-	dot.clr = rnd(16)-1
+	dot.clr = rnd(5)+8
 	dot.draw = function(this)
 		pset(this.x,this.y,this.clr)
 	end
@@ -29,7 +29,7 @@ end
 --init
 function _init()
 	dots = {}
-	for a=1,2500 do
+	for a=1,1500 do
 		add(dots,initdot(64,64))
 	end
 end
