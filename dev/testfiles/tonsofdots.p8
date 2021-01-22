@@ -1,6 +1,28 @@
 pico-8 cartridge // http://www.pico-8.com
 version 29
 __lua__
+--init
+function _init()
+	dots = {}
+	for a=1,1500 do
+		add(dots,initdot(64,64))
+	end
+end
+--update
+function _update()
+	for a in all(dots) do 
+		a:moveran()
+	end
+end
+--draw
+function _draw()
+	cls()
+	for a in all(dots) do
+		a:draw()
+	end
+end
+-->8
+--initdot
 function initdot(x,y)
 	local dot = {}
 	dot.x = x
@@ -24,27 +46,6 @@ function initdot(x,y)
 		end
 	end
 	return dot
-end
-
---init
-function _init()
-	dots = {}
-	for a=1,1500 do
-		add(dots,initdot(64,64))
-	end
-end
---update
-function _update()
-	for a in all(dots) do 
-		a:moveran()
-	end
-end
---draw
-function _draw()
-	cls()
-	for a in all(dots) do
-		a:draw()
-	end
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

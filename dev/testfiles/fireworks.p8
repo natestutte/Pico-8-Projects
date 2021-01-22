@@ -1,25 +1,6 @@
 pico-8 cartridge // http://www.pico-8.com
 version 29
 __lua__
-function createfirework(x,y)
-	local fw={}
-	fw.x=x
-	fw.y=y
-	fw.v=8
-	return fw
-end
-
-function createsparks(x,y,clr)
-	local fws={}
-	fws.x=x
-	fws.y=y
-	fws.vx=rnd(6)-3
-	fws.vy=rnd(6)-3
-	fws.life=rnd(12)
-	fws.clr=clr
-	return fws
-end
-
 function _init()
 	poke(0x5f2d,1)
 	poke(0x5f5c,255)
@@ -89,6 +70,25 @@ function _update()
 		if (a.y<127) add(tempmt,a)
 	end
 	spks=tempmt
+end
+-->8
+function createfirework(x,y)
+	local fw={}
+	fw.x=x
+	fw.y=y
+	fw.v=8
+	return fw
+end
+
+function createsparks(x,y,clr)
+	local fws={}
+	fws.x=x
+	fws.y=y
+	fws.vx=rnd(6)-3
+	fws.vy=rnd(6)-3
+	fws.life=rnd(12)
+	fws.clr=clr
+	return fws
 end
 __gfx__
 00000000770000770000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
